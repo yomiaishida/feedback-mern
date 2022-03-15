@@ -1,0 +1,22 @@
+{
+  "name": "feedback-mern",
+  "version": "1.0.0",
+  "description": "Feedback app with mondoDb",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yomiaishida/feedback-mern.git"
+  },
+  "author": "Abayomi Aishida",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yomiaishida/feedback-mern/issues"
+  },
+  "homepage": "https://github.com/yomiaishida/feedback-mern#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
