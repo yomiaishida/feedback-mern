@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import axios from "axios";
 
 const FeedbackContext = createContext();
 
@@ -12,8 +13,7 @@ export const FeedbackProvider = ({ children }) => {
 
   // Fetch feedback
   const fetchFeedback = async () => {
-    const reponse = await fetch("/feedback?_sort=id&_order=desc");
-    const data = await reponse.json();
+    const { data } = await axios.get("api/feedback");
 
     setFeedback(data);
     setIsLoading(false);
@@ -21,7 +21,7 @@ export const FeedbackProvider = ({ children }) => {
 
   // Update feedback item
   const updateFeedback = async (id, updItem) => {
-    const response = await fetch(`/feedback/${id}`, {
+    const { data } = axios.put(`api/feedback/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -29,7 +29,6 @@ export const FeedbackProvider = ({ children }) => {
       body: JSON.stringify(updItem),
     });
 
-    const data = await response.json();
     setFeedback(
       feedback.map((item) => (item.id === id ? { ...item, ...data } : item))
     );
@@ -44,7 +43,7 @@ export const FeedbackProvider = ({ children }) => {
   // Delete feedback
   const deleteFeedback = async (id) => {
     if (window.confirm("Are you sure you want to delete")) {
-      await fetch(`/feedback/${id}`, { method: "DELETE" });
+      axios.delete(`api/feedback/${id}`);
 
       setFeedback(feedback.filter((item) => item.id !== id));
     }
