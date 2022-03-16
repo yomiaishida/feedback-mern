@@ -21,4 +21,4 @@ const feedbacks = [
   },
 ];
 
-module.exports = feedbacks;
+export default feedbacks;

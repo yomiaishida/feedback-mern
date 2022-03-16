@@ -1,6 +1,6 @@
-const express = require("express");
-const dotenv = require("dotenv");
-const feedbacks = require("./data/feedbacks");
+import express from "express";
+import dotenv from "dotenv";
+import feedbacks from "./data/feedbacks.js";
 
 dotenv.config();
 
