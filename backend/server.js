@@ -1,5 +1,8 @@
 const express = require("express");
+const dotenv = require("dotenv");
 const feedbacks = require("./data/feedbacks");
+
+dotenv.config();
 
 const app = express();
 
@@ -13,8 +16,23 @@ app.get("/api/feedback", (req, res) => {
 
 app.get("/api/feedback/:id", (req, res) => {
   const feedback = feedbacks.find((f) => f._id === req.params.id);
-  console.log(feedback);
   res.json(feedback);
 });
 
-app.listen(5000, console.log("Server running on port 5000"));
+app.delete("/api/feedback/:id", (req, res) => {
+  const feedback = feedbacks.findById(req.params.id);
+  if (feedback) {
+    feedback.remove();
+    res.json({ message: "Feedback removed" });
+  } else {
+    res.status(404);
+    throw new Error("Feedback not found");
+  }
+});
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(
+  PORT,
+  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
+);
