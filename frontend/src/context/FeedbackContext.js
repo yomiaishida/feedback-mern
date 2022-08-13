@@ -45,7 +45,9 @@ export const FeedbackProvider = ({ children }) => {
     if (window.confirm("Are you sure you want to delete")) {
       axios.delete(`api/feedback/${id}`);
 
-      setFeedback(feedback.filter((item) => item.id !== id));
+      console.log(feedback);
+      const del = setFeedback(feedback.filter((item) => item._id !== id));
+      console.log(del);
     }
   };
 

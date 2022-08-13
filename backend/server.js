@@ -17,16 +17,11 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/feedback", async (req, res) => {
-  // res.json(Feedback);
-
-  const feedback = await Feedback.find();
-  console.log(feedback);
+  const feedback = await Feedback.find({});
   res.json(feedback);
 });
 
 app.post("/api/create", async (req, res) => {
-  // res.send("API is running...");
-  // console.log(req.body);
   const { rating, text } = req.body;
 
   try {
