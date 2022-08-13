@@ -50,7 +50,7 @@ app.get("/api/feedback/:id", (req, res) => {
 app.delete("/api/feedback/:id", async (req, res) => {
   const feedback = Feedback.findById(req.params.id);
   if (feedback) {
-    await feedback.remove();
+    await feedback.deleteOne();
     res.json({ message: "Feedback removed" });
   } else {
     res.status(404);
