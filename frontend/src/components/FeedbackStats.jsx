@@ -22,5 +22,5 @@ export default function FeedbackStats() {
 }
 
 FeedbackStats.propTypes = {
-  feedback: PropTypes.array.isRequired,
+  feedback: PropTypes.array,
 };
