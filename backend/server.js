@@ -21,7 +21,7 @@ app.get("/api/feedback", async (req, res) => {
   res.json(feedback);
 });
 
-app.post("/api/create", async (req, res) => {
+app.post("/api/feedback", async (req, res) => {
   const { rating, text } = req.body;
 
   try {
