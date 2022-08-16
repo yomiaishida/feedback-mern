@@ -32,6 +32,20 @@ app.post("/api/feedback", async (req, res) => {
   }
 });
 
+app.patch('api/feedback/:id', (req, res) => {
+  const {rating, text} = req.body
+
+  const oldRating = await Feedback.findById(req.params.id);
+
+  if(oldRating) {
+    oldRating.rating = rating
+    oldRating.text = text
+  }
+
+  updatedRating = await oldRating.save()
+  res.json(updatedRating)
+})
+
 app.get("/api/feedback/:id", (req, res) => {
   const feedback = Feedback.find((f) => f._id === req.params.id);
   if (feedback) {
