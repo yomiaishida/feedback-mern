@@ -32,29 +32,31 @@ app.post("/api/feedback", async (req, res) => {
   }
 });
 
-app.patch('api/feedback/:id', (req, res) => {
-  const {rating, text} = req.body
+app.put("/api/feedback/:id", async (req, res) => {
+  console.log(req.body);
+  const { rating, text } = req.body;
 
   const oldRating = await Feedback.findById(req.params.id);
 
-  if(oldRating) {
-    oldRating.rating = rating
-    oldRating.text = text
+  if (oldRating) {
+    oldRating.rating = rating;
+    oldRating.text = text;
   }
 
-  updatedRating = await oldRating.save()
-  res.json(updatedRating)
-})
-
-app.get("/api/feedback/:id", (req, res) => {
-  const feedback = Feedback.find((f) => f._id === req.params.id);
-  if (feedback) {
-    res.json(feedback);
-  } else {
-    res.status(404);
-    throw new Error("Feedback not found");
-  }
+  const updatedRating = await oldRating.save();
+  res.json(updatedRating);
+  res.send("Running");
 });
+
+// app.get("/api/feedback/:id", (req, res) => {
+//   const feedback = Feedback.find((f) => f._id === req.params.id);
+//   if (feedback) {
+//     res.json(feedback);
+//   } else {
+//     res.status(404);
+//     throw new Error("Feedback not found");
+//   }
+// });
 
 app.delete("/api/feedback/:id", async (req, res) => {
   const feedback = Feedback.findById(req.params.id);
