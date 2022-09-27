@@ -21,16 +21,13 @@ export const FeedbackProvider = ({ children }) => {
 
   // Update feedback item
   const updateFeedback = async (id, updItem) => {
-    const { data } = axios.put(`api/feedback/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updItem),
-    });
+    console.log(id, updItem);
+    const { data } = axios.put(`api/feedback/${id}`, updItem);
+
+    console.log(data);
 
     setFeedback(
-      feedback.map((item) => (item.id === id ? { ...item, ...data } : item))
+      feedback.map((item) => (item._id === id ? { ...item, ...data } : item))
     );
   };
 
@@ -66,6 +63,7 @@ export const FeedbackProvider = ({ children }) => {
   };
 
   const editFeedback = (item) => {
+    console.log(item);
     setFeedbackEdit({
       item,
       edit: true,
