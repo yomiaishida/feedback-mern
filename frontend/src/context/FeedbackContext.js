@@ -16,13 +16,14 @@ export const FeedbackProvider = ({ children }) => {
     const { data } = await axios.get("api/feedback");
 
     setFeedback(data);
+    console.log(feedback);
     setIsLoading(false);
   };
 
   // Update feedback item
   const updateFeedback = async (id, updItem) => {
     console.log(id, updItem);
-    const { data } = axios.put(`api/feedback/${id}`, updItem);
+    const { data } = await axios.put(`api/feedback/${id}`, updItem);
 
     console.log(data);
 
