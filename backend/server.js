@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 
 app.get("/api/feedback", async (req, res) => {
   const feedback = await Feedback.find({});
-  res.json(feedback);
+  res.status(200).json(feedback);
 });
 
 app.post("/api/feedback", async (req, res) => {
@@ -41,11 +41,12 @@ app.put("/api/feedback/:id", async (req, res) => {
   if (oldRating) {
     oldRating.rating = rating;
     oldRating.text = text;
+  } else {
+    throw new Error();
   }
 
   const updatedRating = await oldRating.save();
   res.json(updatedRating);
-  res.send("Running");
 });
 
 // app.get("/api/feedback/:id", (req, res) => {
