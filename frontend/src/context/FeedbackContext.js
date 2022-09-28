@@ -16,16 +16,12 @@ export const FeedbackProvider = ({ children }) => {
     const { data } = await axios.get("api/feedback");
 
     setFeedback(data);
-    console.log(feedback);
     setIsLoading(false);
   };
 
   // Update feedback item
   const updateFeedback = async (id, updItem) => {
-    console.log(id, updItem);
     const { data } = await axios.put(`api/feedback/${id}`, updItem);
-
-    console.log(data);
 
     setFeedback(
       feedback.map((item) => (item._id === id ? { ...item, ...data } : item))
@@ -43,9 +39,7 @@ export const FeedbackProvider = ({ children }) => {
     if (window.confirm("Are you sure you want to delete")) {
       axios.delete(`api/feedback/${id}`);
 
-      console.log(feedback);
       const del = setFeedback(feedback.filter((item) => item._id !== id));
-      console.log(del);
     }
   };
 
@@ -64,7 +58,6 @@ export const FeedbackProvider = ({ children }) => {
   };
 
   const editFeedback = (item) => {
-    console.log(item);
     setFeedbackEdit({
       item,
       edit: true,
