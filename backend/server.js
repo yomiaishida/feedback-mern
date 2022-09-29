@@ -33,7 +33,6 @@ app.post("/api/feedback", async (req, res) => {
 });
 
 app.put("/api/feedback/:id", async (req, res) => {
-  console.log(req.body);
   const { rating, text } = req.body;
 
   const oldRating = await Feedback.findById(req.params.id);
